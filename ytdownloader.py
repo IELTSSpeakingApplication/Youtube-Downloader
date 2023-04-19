@@ -71,6 +71,9 @@ def get_trimmed(mp3_filename, initial, final = ""):
     
     return sound[t0:]
 
+def delete_original_file(filename):
+    os.remove(filename)
+
 def main():
     download_audio(args["url"])
     filename = newest_mp3_filename()
@@ -78,6 +81,7 @@ def main():
     trimmed_filename = "".join([filename.split(".mp3")[0], "- TRIM.mp3"])
     print("Process concluded successfully. Saving trimmed file as ", trimmed_filename)
     trimmed_file.export(trimmed_filename, format="mp3")
+    delete_original_file(filename)
 
 if __name__ == "__main__":
     main()
